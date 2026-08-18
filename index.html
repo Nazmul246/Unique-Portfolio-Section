@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shoplift Studio — Hero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .sls-new-portfolio-section {
+        --sls-bg: #0a0c0f;
+        --sls-bg-card: #12151a;
+        --sls-ink: #f5f6f8;
+        --sls-ink-dim: #9aa1ac;
+        --sls-ink-faint: #5c6470;
+        --sls-line: #23272e;
+        --sls-accent-a: #ff5a36;
+        --sls-accent-b: #5b8def;
+        --sls-accent-c: #ffb648;
+        --sls-radius: 18px;
+        position: relative;
+        min-height: 100vh;
+        background: var(--sls-bg);
+        color: var(--sls-ink);
+        font-family: "Inter", system-ui, sans-serif;
+        overflow: hidden;
+      }
+
+      .sls-new-portfolio-section * {
+        box-sizing: border-box;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-scroll {
+        position: relative;
+        height: 320vh;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-pin {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: clamp(28px, 4vw, 64px);
+        padding: 0 clamp(20px, 5vw, 88px);
+        overflow: hidden;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-pin::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(90deg, var(--sls-line) 1px, transparent 1px),
+          linear-gradient(180deg, var(--sls-line) 1px, transparent 1px);
+        background-size: 64px 64px;
+        opacity: 0.26;
+        mask-image: radial-gradient(circle at 30% 35%, black, transparent 74%);
+        pointer-events: none;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-left {
+        position: relative;
+        z-index: 2;
+        flex: 0 0 auto;
+        width: min(560px, 46%);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        margin-bottom: 64px;
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-logo svg {
+        display: block;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-headline {
+        margin: 0 0 22px;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: clamp(36px, 4vw, 64px);
+        line-height: 1.04;
+        letter-spacing: -0.025em;
+        font-weight: 600;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-headline span {
+        display: block;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-dim {
+        color: var(--sls-ink-faint);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-sub {
+        max-width: 440px;
+        margin: 0 0 32px;
+        font-size: 16px;
+        line-height: 1.65;
+        color: var(--sls-ink-dim);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-sub b {
+        color: var(--sls-ink);
+        font-weight: 600;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-cta-row {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 34px;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-btn {
+        border: 1px solid transparent;
+        border-radius: 999px;
+        padding: 13px 22px;
+        cursor: pointer;
+        font-size: 14.5px;
+        font-weight: 600;
+        font-family: "Inter", sans-serif;
+        transition:
+          transform 0.18s ease,
+          opacity 0.18s ease;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-btn-solid {
+        background: var(--sls-ink);
+        color: #0a0c0f;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-btn-outline {
+        background: transparent;
+        color: var(--sls-ink);
+        border-color: var(--sls-line);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-checklist {
+        list-style: none;
+        margin: 0 0 56px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-checklist li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--sls-ink-dim);
+        font-size: 14px;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-checklist svg {
+        flex: 0 0 auto;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-proof-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-avatars {
+        display: flex;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-av {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 2px solid var(--sls-bg);
+        margin-left: -10px;
+        background: linear-gradient(
+          135deg,
+          var(--sls-accent-b),
+          var(--sls-accent-a)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        color: #0a0c0f;
+        font-weight: 600;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-av:first-child {
+        margin-left: 0;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-proof-text {
+        font-size: 13px;
+        color: var(--sls-ink-faint);
+        line-height: 1.4;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-proof-text b {
+        color: var(--sls-ink);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-right {
+        position: relative;
+        flex: 1 1 auto;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-stage {
+        position: relative;
+        width: min(100%, 760px);
+        height: 690px;
+        perspective: 1600px;
+        opacity: 0;
+        transform: translateY(34px);
+        transition:
+          opacity 0.9s ease,
+          transform 1.2s ease;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-card {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: min(86%, 600px);
+        will-change: transform, opacity, filter;
+        transform-style: preserve-3d;
+        opacity: 0;
+        filter: blur(18px);
+        transition:
+          opacity 1s ease,
+          transform 1.2s cubic-bezier(0.2, 0.85, 0.22, 1),
+          filter 1s ease;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-card-frame {
+        border-radius: var(--sls-radius);
+        background: var(--sls-bg-card);
+        border: 1px solid var(--sls-line);
+        overflow: hidden;
+        box-shadow: 0 28px 60px -18px rgba(0, 0, 0, 0.55);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-card-chrome {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 14px;
+        background: #171b21;
+        border-bottom: 1px solid var(--sls-line);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-card-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #3a3f47;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-card-url {
+        margin-left: 6px;
+        font-size: 11.5px;
+        color: var(--sls-ink-faint);
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-card-tag {
+        font-size: 10.5px;
+        font-weight: 600;
+        padding: 3px 9px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--sls-ink-dim);
+        letter-spacing: 0.02em;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-card-body {
+        position: relative;
+        aspect-ratio: 16 / 11.1;
+        padding: 18px 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-mock-title {
+        height: 13px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.85);
+        width: 78%;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-mock-title-short {
+        width: 48%;
+        background: rgba(255, 255, 255, 0.55);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-mock-btn {
+        margin-top: 8px;
+        width: 126px;
+        height: 30px;
+        border-radius: 999px;
+        background: rgba(10, 12, 15, 0.85);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-project-name {
+        position: absolute;
+        bottom: 14px;
+        left: 24px;
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        color: rgba(10, 12, 15, 0.75);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-card-caption {
+        margin-top: 12px;
+        font-size: 12.5px;
+        color: var(--sls-ink-faint);
+        text-align: center;
+        letter-spacing: 0.01em;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-g0 {
+        background: linear-gradient(155deg, #f4ced9, #efe3d5 62%, #e4b77e);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-g1 {
+        background: linear-gradient(155deg, #d5f0d5, #edf0c4 56%, #f0bb7b);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-g2 {
+        background: linear-gradient(155deg, #c0dff4, #dfeaf5 56%, #89b4ec);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-g3 {
+        background: linear-gradient(155deg, #e5ddd1, #f5efe4 56%, #c8b38a);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-g4 {
+        background: linear-gradient(155deg, #2f343d, #3a3238 56%, #7d423d);
+      }
+
+      .sls-new-portfolio-section
+        .sls-new-portfolio-g4
+        .sls-new-portfolio-mock-title {
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .sls-new-portfolio-section
+        .sls-new-portfolio-g4
+        .sls-new-portfolio-mock-title-short {
+        background: rgba(255, 255, 255, 0.52);
+      }
+
+      .sls-new-portfolio-section
+        .sls-new-portfolio-g4
+        .sls-new-portfolio-mock-btn {
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .sls-new-portfolio-section
+        .sls-new-portfolio-g4
+        .sls-new-portfolio-project-name {
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-rail {
+        position: absolute;
+        right: -6px;
+        top: 6%;
+        bottom: 6%;
+        width: 2px;
+        background-image: linear-gradient(var(--sls-line) 50%, transparent 50%);
+        background-size: 2px 10px;
+        background-repeat: repeat-y;
+        overflow: visible;
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-spark {
+        position: absolute;
+        left: -3px;
+        width: 8px;
+        border-radius: 6px;
+        filter: blur(0.3px);
+        transform-origin: center;
+        opacity: 0;
+      }
+
+      @keyframes slsNewPortfolioSparkGrow {
+        0% {
+          height: 0px;
+          opacity: 0;
+          transform: scaleY(0.4) translateY(0);
+        }
+        12% {
+          opacity: 1;
+        }
+        55% {
+          opacity: 0.9;
+        }
+        100% {
+          height: 120px;
+          opacity: 0;
+          transform: scaleY(1) translateY(0);
+        }
+      }
+
+      .sls-new-portfolio-section .sls-new-portfolio-scroll-hint {
+        position: absolute;
+        right: 18px;
+        bottom: -7px;
+        font-size: 12px;
+        font-style: italic;
+        color: var(--sls-ink-faint);
+        letter-spacing: 0.02em;
+        transition: opacity 0.4s ease;
+      }
+
+      @media (max-width: 980px) {
+        .sls-new-portfolio-section .sls-new-portfolio-pin {
+          flex-direction: column;
+          justify-content: center;
+          gap: 36px;
+          padding: 96px 6vw 40px;
+        }
+
+        .sls-new-portfolio-section .sls-new-portfolio-left {
+          width: 100%;
+        }
+
+        .sls-new-portfolio-section .sls-new-portfolio-logo {
+          margin-bottom: 36px;
+        }
+
+        .sls-new-portfolio-section .sls-new-portfolio-cta-row,
+        .sls-new-portfolio-section .sls-new-portfolio-checklist {
+          margin-bottom: 24px;
+        }
+
+        .sls-new-portfolio-section .sls-new-portfolio-right {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .sls-new-portfolio-section .sls-new-portfolio-stage {
+          width: min(100%, 560px);
+          height: 490px;
+        }
+
+        .sls-new-portfolio-section .sls-new-portfolio-scroll {
+          height: 280vh;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .sls-new-portfolio-section .sls-new-portfolio-card {
+          transition: none !important;
+        }
+
+        .sls-new-portfolio-section .sls-new-portfolio-spark {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section
+      class="sls-new-portfolio-section"
+      aria-label="Portfolio hero section"
+    >
+      <div class="sls-new-portfolio-scroll" id="slsNewPortfolioScroll">
+        <div class="sls-new-portfolio-pin">
+          <div class="sls-new-portfolio-left">
+            <div class="sls-new-portfolio-logo">
+              <svg
+                width="26"
+                height="26"
+                viewBox="0 0 26 26"
+                fill="none"
+                aria-hidden="true"
+              >
+                <rect
+                  x="1"
+                  y="1"
+                  width="14"
+                  height="14"
+                  rx="4"
+                  fill="var(--sls-accent-a)"
+                />
+                <rect
+                  x="11"
+                  y="11"
+                  width="14"
+                  height="14"
+                  rx="4"
+                  fill="var(--sls-accent-b)"
+                />
+              </svg>
+              Shoplift Studio
+            </div>
+
+            <h1 class="sls-new-portfolio-headline">
+              <span>Your brand moves fast.</span>
+              <span class="sls-new-portfolio-dim"
+                >Your storefront should too.</span
+              >
+            </h1>
+
+            <p class="sls-new-portfolio-sub">
+              Shoplift Studio partners with growing brands to
+              <b>build, redesign, and maintain</b>
+              Shopify and WordPress stores that keep pace with the business
+              behind them.
+            </p>
+
+            <div class="sls-new-portfolio-cta-row">
+              <button class="sls-new-portfolio-btn sls-new-portfolio-btn-solid">
+                Start a project
+              </button>
+              <button
+                class="sls-new-portfolio-btn sls-new-portfolio-btn-outline"
+              >
+                View work
+              </button>
+            </div>
+
+            <ul class="sls-new-portfolio-checklist">
+              <li>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 7l3.5 3.5L12 3.5"
+                    stroke="var(--sls-accent-a)"
+                    stroke-width="1.6"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Starting at $1,200
+              </li>
+              <li>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 7l3.5 3.5L12 3.5"
+                    stroke="var(--sls-accent-a)"
+                    stroke-width="1.6"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Launch in 2–4 weeks
+              </li>
+              <li>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 7l3.5 3.5L12 3.5"
+                    stroke="var(--sls-accent-a)"
+                    stroke-width="1.6"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Shopify &amp; WordPress specialists
+              </li>
+            </ul>
+
+            <div class="sls-new-portfolio-proof-row">
+              <div class="sls-new-portfolio-avatars">
+                <div class="sls-new-portfolio-av">N</div>
+                <div class="sls-new-portfolio-av">J</div>
+                <div class="sls-new-portfolio-av">M</div>
+              </div>
+              <div class="sls-new-portfolio-proof-text">
+                <b>110+ stores</b> launched since 2019
+              </div>
+            </div>
+          </div>
+
+          <div class="sls-new-portfolio-right">
+            <div class="sls-new-portfolio-stage" id="slsNewPortfolioStage">
+              <div class="sls-new-portfolio-card" data-i="0">
+                <div class="sls-new-portfolio-card-frame">
+                  <div class="sls-new-portfolio-card-chrome">
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-url"
+                      >auroraskincare.com</span
+                    >
+                    <span class="sls-new-portfolio-card-tag">Shopify</span>
+                  </div>
+                  <div class="sls-new-portfolio-card-body sls-new-portfolio-g0">
+                    <div class="sls-new-portfolio-mock-title"></div>
+                    <div
+                      class="sls-new-portfolio-mock-title sls-new-portfolio-mock-title-short"
+                    ></div>
+                    <div class="sls-new-portfolio-mock-btn"></div>
+                    <div class="sls-new-portfolio-project-name">
+                      Aurora Skincare
+                    </div>
+                  </div>
+                </div>
+                <div class="sls-new-portfolio-card-caption">
+                  Aurora Skincare — full Shopify redesign
+                </div>
+              </div>
+
+              <div class="sls-new-portfolio-card" data-i="1">
+                <div class="sls-new-portfolio-card-frame">
+                  <div class="sls-new-portfolio-card-chrome">
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-url"
+                      >vantageoutdoor.com</span
+                    >
+                    <span class="sls-new-portfolio-card-tag">Shopify</span>
+                  </div>
+                  <div class="sls-new-portfolio-card-body sls-new-portfolio-g1">
+                    <div class="sls-new-portfolio-mock-title"></div>
+                    <div
+                      class="sls-new-portfolio-mock-title sls-new-portfolio-mock-title-short"
+                    ></div>
+                    <div class="sls-new-portfolio-mock-btn"></div>
+                    <div class="sls-new-portfolio-project-name">
+                      Vantage Outdoor
+                    </div>
+                  </div>
+                </div>
+                <div class="sls-new-portfolio-card-caption">
+                  Vantage Outdoor — product page overhaul
+                </div>
+              </div>
+
+              <div class="sls-new-portfolio-card" data-i="2">
+                <div class="sls-new-portfolio-card-frame">
+                  <div class="sls-new-portfolio-card-chrome">
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-url"
+                      >nimbushome.co</span
+                    >
+                    <span class="sls-new-portfolio-card-tag">WordPress</span>
+                  </div>
+                  <div class="sls-new-portfolio-card-body sls-new-portfolio-g2">
+                    <div class="sls-new-portfolio-mock-title"></div>
+                    <div
+                      class="sls-new-portfolio-mock-title sls-new-portfolio-mock-title-short"
+                    ></div>
+                    <div class="sls-new-portfolio-mock-btn"></div>
+                    <div class="sls-new-portfolio-project-name">
+                      Nimbus Home
+                    </div>
+                  </div>
+                </div>
+                <div class="sls-new-portfolio-card-caption">
+                  Nimbus Home — WordPress storefront build
+                </div>
+              </div>
+
+              <div class="sls-new-portfolio-card" data-i="3">
+                <div class="sls-new-portfolio-card-frame">
+                  <div class="sls-new-portfolio-card-chrome">
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-url"
+                      >solacewellness.com</span
+                    >
+                    <span class="sls-new-portfolio-card-tag">Shopify</span>
+                  </div>
+                  <div class="sls-new-portfolio-card-body sls-new-portfolio-g3">
+                    <div class="sls-new-portfolio-mock-title"></div>
+                    <div
+                      class="sls-new-portfolio-mock-title sls-new-portfolio-mock-title-short"
+                    ></div>
+                    <div class="sls-new-portfolio-mock-btn"></div>
+                    <div class="sls-new-portfolio-project-name">
+                      Solace Wellness
+                    </div>
+                  </div>
+                </div>
+                <div class="sls-new-portfolio-card-caption">
+                  Solace Wellness — theme customization
+                </div>
+              </div>
+
+              <div class="sls-new-portfolio-card" data-i="4">
+                <div class="sls-new-portfolio-card-frame">
+                  <div class="sls-new-portfolio-card-chrome">
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-dot"></span>
+                    <span class="sls-new-portfolio-card-url"
+                      >forgefitness.com</span
+                    >
+                    <span class="sls-new-portfolio-card-tag">WordPress</span>
+                  </div>
+                  <div class="sls-new-portfolio-card-body sls-new-portfolio-g4">
+                    <div class="sls-new-portfolio-mock-title"></div>
+                    <div
+                      class="sls-new-portfolio-mock-title sls-new-portfolio-mock-title-short"
+                    ></div>
+                    <div class="sls-new-portfolio-mock-btn"></div>
+                    <div class="sls-new-portfolio-project-name">
+                      Forge Fitness
+                    </div>
+                  </div>
+                </div>
+                <div class="sls-new-portfolio-card-caption">
+                  Forge Fitness — dark theme WooCommerce build
+                </div>
+              </div>
+
+              <div
+                class="sls-new-portfolio-rail"
+                id="slsNewPortfolioRail"
+              ></div>
+              <div
+                class="sls-new-portfolio-scroll-hint"
+                id="slsNewPortfolioScrollHint"
+              >
+                (Scroll)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      style="
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #5c6470;
+        font-family: &quot;Inter&quot;, sans-serif;
+      "
+    >
+      Rest of the page continues here…
+    </section>
+
+    <script>
+      (function () {
+        const scrollWrap = document.getElementById("slsNewPortfolioScroll");
+        const stage = document.getElementById("slsNewPortfolioStage");
+        const cards = Array.from(
+          document.querySelectorAll(".sls-new-portfolio-card"),
+        );
+        const rail = document.getElementById("slsNewPortfolioRail");
+        const scrollHint = document.getElementById("slsNewPortfolioScrollHint");
+        const count = cards.length;
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        let targetIndex = 0;
+        let currentIndex = 0;
+        let ticking = false;
+
+        function getProgress() {
+          const rect = scrollWrap.getBoundingClientRect();
+          const total = scrollWrap.offsetHeight - window.innerHeight;
+          if (total <= 0) return 0;
+          const scrolled = -rect.top;
+          return Math.min(1, Math.max(0, scrolled / total));
+        }
+
+        function shortestDiff(i, v) {
+          let d = i - v;
+          d = ((d % count) + count) % count;
+          if (d > count / 2) d -= count;
+          return d;
+        }
+
+        function isMobile() {
+          return window.innerWidth <= 980;
+        }
+
+        function render() {
+          const spacing = isMobile() ? 175 : 220;
+          cards.forEach((card) => {
+            const i = parseInt(card.dataset.i, 10);
+            const diff = shortestDiff(i, currentIndex);
+            const abs = Math.abs(diff);
+            const y = diff * spacing;
+            const scale = Math.max(0.62, 1 - abs * 0.16);
+            const opacity = Math.max(0, 1 - abs * 0.42);
+            const rotateX = diff * -14;
+            const z = Math.round(100 - abs * 10);
+
+            card.style.transform = `translate(-50%, -50%) translateY(${y}px) scale(${scale}) rotateX(${rotateX}deg)`;
+            card.style.opacity = opacity.toFixed(3);
+            card.style.zIndex = z;
+            card.style.filter =
+              abs > 0.4 ? `blur(${Math.min(abs * 1.2, 3)}px)` : "none";
+            card.style.pointerEvents = abs < 0.4 ? "auto" : "none";
+          });
+
+          if (scrollHint) {
+            const p = getProgress();
+            scrollHint.style.opacity = Math.max(0, 1 - p * 6);
+          }
+        }
+
+        function loop() {
+          currentIndex +=
+            (targetIndex - currentIndex) * (reduceMotion ? 1 : 0.09);
+          render();
+          requestAnimationFrame(loop);
+        }
+
+        function onScroll() {
+          const p = getProgress();
+          targetIndex = p * count;
+          ticking = false;
+        }
+
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (!ticking) {
+              requestAnimationFrame(onScroll);
+              ticking = true;
+            }
+          },
+          { passive: true },
+        );
+
+        window.addEventListener("resize", render);
+
+        function revealCards() {
+          if (stage) {
+            stage.style.opacity = "1";
+            stage.style.transform = "translateY(0)";
+          }
+
+          cards.forEach((card, index) => {
+            card.style.opacity = "0";
+            card.style.filter = "blur(18px)";
+            card.style.transform =
+              "translate(-50%, -50%) translateY(90px) scale(0.72) rotateX(80deg)";
+            card.style.pointerEvents = "none";
+
+            setTimeout(
+              () => {
+                card.style.opacity = "1";
+                card.style.filter = "blur(0)";
+                card.style.transform =
+                  "translate(-50%, -50%) translateY(0) scale(1) rotateX(0deg)";
+                card.style.pointerEvents = "auto";
+              },
+              260 + index * 300,
+            );
+          });
+        }
+
+        setTimeout(revealCards, 500);
+        requestAnimationFrame(loop);
+        onScroll();
+
+        if (!reduceMotion && rail) {
+          const gradients = [
+            "linear-gradient(180deg, var(--sls-accent-a), transparent)",
+            "linear-gradient(180deg, var(--sls-accent-b), transparent)",
+            "linear-gradient(180deg, var(--sls-accent-c), transparent)",
+            "linear-gradient(180deg, var(--sls-accent-a), var(--sls-accent-b))",
+          ];
+          let active = 0;
+          const MAX_ACTIVE = 4;
+
+          function spawnSpark() {
+            if (active >= MAX_ACTIVE) {
+              scheduleNext();
+              return;
+            }
+
+            const spark = document.createElement("div");
+            spark.className = "sls-new-portfolio-spark";
+            const topPct = Math.random() * 82;
+            const duration = 1.8 + Math.random() * 1.6;
+            spark.style.top = topPct + "%";
+            spark.style.background =
+              gradients[Math.floor(Math.random() * gradients.length)];
+            spark.style.animation = `slsNewPortfolioSparkGrow ${duration}s ease-out forwards`;
+            spark.style.boxShadow = "0 0 12px rgba(255,120,80,.35)";
+
+            active++;
+            spark.addEventListener("animationend", () => {
+              spark.remove();
+              active--;
+            });
+
+            rail.appendChild(spark);
+            scheduleNext();
+          }
+
+          function scheduleNext() {
+            const delay = 350 + Math.random() * 700;
+            setTimeout(spawnSpark, delay);
+          }
+
+          scheduleNext();
+        }
+      })();
+    </script>
+  </body>
+</html>
